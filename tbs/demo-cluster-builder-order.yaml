@@ -1,0 +1,19 @@
+---
+- group:
+  - id: tanzu-buildpacks/dotnet-core
+- group:
+  - id: tanzu-buildpacks/nodejs
+- group:
+  - id: tanzu-buildpacks/go
+- group:
+  - id: tanzu-buildpacks/php 
+- group:
+  - id: tanzu-buildpacks/nginx
+- group:
+  - id: tanzu-buildpacks/httpd
+- group:
+  - id: tanzu-buildpacks/java-native-image
+- group:
+  - id: tanzu-buildpacks/java 
+- group:
+  - id: paketo-buildpacks/procfile 

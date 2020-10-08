@@ -1,0 +1,12 @@
+#@ load("@ytt:data", "data")
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-creds
+  namespace: #@ data.values.commonSecrets.tbsProject
+  annotations:
+    kpack.io/docker: #@ "https://" + data.values.commonSecrets.HarborDomain
+type: kubernetes.io/basic-auth
+stringData:
+  username: #@ data.values.commonSecrets.harborUser
+  password: #@ data.values.commonSecrets.harborPassword
