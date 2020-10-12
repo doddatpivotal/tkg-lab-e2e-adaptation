@@ -4,7 +4,7 @@
 
 2. Switch the context to the namespace "petclinic"
 
-3. Click Catalog and Search for MySql
+3. Click Catalog and Search for MySql and then click MySql
 
 4. Deploy MySql and name it `petclinic-db`
 
@@ -20,6 +20,11 @@ replication:
 root:
   password: petclinic
 ```
+
+5. Wait for App to be ready
+
+![Pet Clinic MySql DB](petclinic-db.png)
+
 
 ## Go to Next Step
 

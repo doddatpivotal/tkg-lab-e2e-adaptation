@@ -5,7 +5,7 @@
 2. Set environment variables for use in the following sections
 
 ```bash
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML petclinic.image)
+export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
 export REGISTRY_USER=$(yq r $PARAMS_YAML commonSecrets.harborUser)
 export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
 ```
@@ -38,12 +38,12 @@ kbld relocate -f /tmp/images.lock --lock-output /tmp/images-relocated.lock --rep
 ytt -f /tmp/values.yaml \
     -f /tmp/manifests/ \
     -v docker_repository="$TBS_REPOSITORY" \
-    -v docker_username="$REGISTRY_USER" \ 
-    -v docker_password="$REGISTRY_PASSWORD" \ 
+    -v docker_username="$REGISTRY_USER" \
+    -v docker_password="$REGISTRY_PASSWORD" \
     | kbld -f /tmp/images-relocated.lock -f- \
     | kapp deploy -a tanzu-build-service -n tanzu-kapp -f- -y
-kp import -f ~/Downloads/descriptor-7.yaml 
-kp import -f ~/Downloads/descriptor-100.0.22.yaml 
+kp import -f ~/Downloads/descriptor-7.yaml
+kp import -f ~/Downloads/descriptor-100.0.22.yaml
 ```
 
 ## Validate

@@ -74,19 +74,19 @@ jobs:
               echo $KUBECONFIG_JSON>kubeconfig.json
               export KUBECONFIG=kubeconfig.json
               set +e
-              kp image list -n ((common-secrets.tbsProject)) | grep "spring-petclinic" 
+              kp image list -n ((petclinic.tbsNamespace)) | grep "spring-petclinic" 
               exists=$?
               set -e
               if [ $exists -eq 0 ]; then
                 kp image patch spring-petclinic \
-                  --namespace ((common-secrets.tbsProject)) \
+                  --namespace ((petclinic.tbsNamespace)) \
                   --wait \
                   --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
               else
                 kp image create spring-petclinic \
                   --tag ((petclinic.image)) \
                   --cluster-builder demo-cluster-builder \
-                  --namespace ((common-secrets.tbsProject)) \
+                  --namespace ((petclinic.tbsNamespace)) \
                   --wait \
                   --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
               fi

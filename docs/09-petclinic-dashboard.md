@@ -10,7 +10,7 @@
 
 5. Add the following events `query events(name="DEPLOY_EVENT_NAME")`
 
->Note: The DEPLOY_EVENT_NAME value above is from $(yq r $PARAMS_YAML petclinic.wavefront.deployEventName)
+>Note: The DEPLOY_EVENT_NAME value above is from `yq r $PARAMS_YAML petclinic.wavefront.deployEventName`
 
 6. Save the dashboard and name it something specific to your user name.  I chose `dpfeffer-petclinic-dashboard`.
 

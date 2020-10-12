@@ -17,16 +17,25 @@ petclinic:
     uri: https://surf.wavefront.com # Your Tanzu Observability URI
     apiToken: REDACTED # Your Tanzu Obsevability Api Token
     deployEventName: YOUR_EVENT_NAME # Mine is dpfeffer-spring-petclinic-deploy, we don't want to conflict here
+  tmc:
+    workload-cluster: YOUR_WORKLOAD_CLUSTER_NAME_IN_TMC # Mine is dpfeffer-ironislands-vsphere
+    shared-services-cluster: YOUR_SHARED_SERVICES_CLUSTER_NAME_IN_TMC # Mine is dpfeffer-stormsend-vsphere
+    workspace: YOUR_WORKSPACE_NAME_IN_TMC # Mine is dpfeffer-petclinic
+  tbs:
+    namespace: tbs-project-petclinic
+tbs:
+  harborRepository: harbor.stormsend.tkg-vsphere-lab.winterfell.live/tbs/build-service  # where you want tbs images to be placed  
 commonSecrets:
   harborDomain: harbor.stormsend.tkg-vsphere-lab.winterfell.live
   harborUser: REDACTED 
   harborPassword: REDACTED
-  tbsProject: tbs-project-petclinic
   kubeconfigBuildServer: REDACTED # This should be minified json version of your kubeconfig with context set to the cluster where you Tanzu Build Server is deployed.  That should be the shared services cluster.
   kubeconfigAppServer: REDACTED # This should be minified json version of your kubeconfig with context set to the cluster where you Pet Clinic is deployed.  That should be the workload cluster.
   concourseHelperImage: harbor.stormsend.tkg-vsphere-lab.winterfell.live/concourse/concourse-helper # Your concourse helper image
   concourseAlias: stormsend # Your concourse alias
   concourseUri: https://concourse.stormsend.tkg-vsphere-lab.winterfell.live # Your concourse URI
+  concourseUser: REDACTED
+  concoursePassword: REDACTED  
 ```
 
 ## Export Location of Params YAML

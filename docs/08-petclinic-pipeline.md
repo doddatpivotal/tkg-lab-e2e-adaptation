@@ -18,12 +18,13 @@ fly -t $(yq r $PARAMS_YAML commonSecrets.concourseAlias) login \
 3. Checkout the Pipeline
 
 ```bash
-open https://$(yq r $PARAMS_YAML commonSecrets.concourseUri)
+open $(yq r $PARAMS_YAML commonSecrets.concourseUri)
 ```
+And then login
 
 4. Unpause the pipeline
 
-5. Trigger the CI Pipeline
+5. Notice the `continuous-integration` job is automatically triggered
 
 6. Validate that the image was created in Harbor
 

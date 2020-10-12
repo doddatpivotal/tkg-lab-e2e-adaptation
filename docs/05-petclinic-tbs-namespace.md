@@ -6,13 +6,24 @@ In order manage Spring Pet Clinic images, we have to do some setup.  In the past
 
 2. Configure the Harbor project to scan images immediately on push.
 
+3. Set environment variables for use in the following sections
+
+```bash
+export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)
+export REGISTRY_USER=$(yq r $PARAMS_YAML commonSecrets.harborUser)
+export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
+export TBS_NAMESPACE=$(yq r $PARAMS_YAML petclinic.tbs.namespace)
+```
+
 3. Create the secret holding Harbor credentials
 
 >Note: Ensure you have switched your local kube context to your shared services cluster
 
 ```bash
-ytt -f tbs/images -f $PARAMS_YAML \
-| kapp deploy -a petclinic-tbs-images -f- -y
+kp secret create harbor-creds \
+  --registry $HARBOR_DOMAIN \
+  --registry-user $REGISTRY_USER \
+  --namespace $TBS_NAMESPACE
 ```
 
 ## Go to Next Step
