@@ -1,5 +1,24 @@
 # Create Concourse Pipeline for Spring Pet Clinic
 
+## Build Concourse Helper Image and Push to Harbor
+
+I've created a concourse helper image, which is used within the concourse pipeline, with the the following utilities:
+
+- kapp
+- ytt
+- kubectl
+- kp
+
+You can do the same and push the image to your local harbor repository.
+
+1. Create project in Harbor for the image.  I named mine `concourse` and set it to public access
+
+2. Clone or fork my repository [https://github.com/doddatpivotal/concourse-helper](https://github.com/doddatpivotal/concourse-helper)
+
+Follow instructions in the [readme](https://github.com/doddatpivotal/concourse-helper/blob/master/Readme.md) to build the image and push to your local repository.
+
+## Create Pipeline
+
 The Spring Pet Clinic CI/CD pipeline in concourse heavily relies on environment-specific data.  
 
 1. Ensure you PARAMS_YAML environment value from step 01 is set.
