@@ -37,4 +37,4 @@ With the above in place, you are now set to deliver an awesome short demo showca
 
 ## One-off Activities
 
-[Execute the Demo](docs/one-off.md)
+[One-off Operations](docs/one-off.md)
