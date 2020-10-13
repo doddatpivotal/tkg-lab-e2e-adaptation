@@ -11,7 +11,7 @@ Big shoutout to my peers who created this demo, which was was the foundation of 
 ## How to Get Everything Setup
 
 0. [Setup Foundational Lab Environment and Bonus Labs](docs/00-tkg-lab-foundation.md)
-1. [Setup Environment Specific Params Yaml](docs/01-environment-confg.md)
+1. [Setup Environment Specific Params Yaml](docs/01-environment-config.md)
 2. [Install TBS And OOTB Dependencies](docs/02-tbs-base-install.md)
 3. [Setup TBS Demo Stack and Cluster Builder](docs/03-tbs-custom-dependencies.md)
 4. [Setup Workspace and Pet Clinic Namespace](docs/04-petclinic-workspace.md)
