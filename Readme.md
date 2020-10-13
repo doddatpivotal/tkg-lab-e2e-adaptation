@@ -21,6 +21,7 @@ Big shoutout to my peers who created this demo, which was was the foundation of 
 8. [Create Concourse Pipeline for Spring Pet Clinic](docs/08-petclinic-pipeline.md)
 9. [Create TO Wavefront Dashboard](docs/09-petclinic-dashboard.md)
 10. [Update TBS Stack to Remediate CVEs](docs/10-tbs-stack-update.md)
+11. [Setup Load Generation for More Interesting Dashboards](docs/11-load-generation.md)
 
 ## Execute the Demo
 

@@ -1,2 +1,3 @@
 .DS_Store
 local-config/
+__pycache__

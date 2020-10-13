@@ -26,3 +26,7 @@ kp build list spring-petclinic
 Harbor should now show a second image created with fewer CVEs.
 
 ![Harbor Images](petclinic-rebase.png)
+
+## Go to Next Step
+
+[Setup Load Generation for More Interesting Dashboards](11-load-generation.md)
