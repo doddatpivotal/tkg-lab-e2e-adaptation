@@ -4,11 +4,9 @@ The following approach was borrowed by the TSM demo which uses [acme-fitness](ht
 
 # Requirements
 
-1. Needs Python3.6 and above
+1. Local docker daemon
 
-2. Locust - [Locust](https://docs.locust.io/en/stable/installation.html)
-
-3. Spring Pet Clinic
+2. Spring Pet Clinic
 
 # Steps
 
@@ -17,16 +15,11 @@ The following approach was borrowed by the TSM demo which uses [acme-fitness](ht
 ```bash
 export PETCLINIC_HOST=$(yq r $PARAMS_YAML petclinic.host)
 ```
-2. Install requirements for locust script
+
+2. Run locust via docker
 
 ```bash
-pip3 install -r traffic-generator/requirements.txt
-```
-
-3. Run locust
-
-```bash
-locust --host=https://$PETCLINIC_HOST --locustfile traffic-generator/locustfile.py
+docker run -p 8089:8089 -v $PWD:/mnt/locust -e "HOST=https://$PETCLINIC_HOST" locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H https://$PETCLINIC_HOST
 ```
 
 3. Access Locus UI
