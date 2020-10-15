@@ -19,7 +19,7 @@ export PETCLINIC_HOST=$(yq r $PARAMS_YAML petclinic.host)
 2. Run locust via docker
 
 ```bash
-docker run -p 8089:8089 -v $PWD:/mnt/locust -e "HOST=https://$PETCLINIC_HOST" locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H https://$PETCLINIC_HOST
+docker run -p 8089:8089 -v $PWD:/mnt/locust locustio/locust -f /mnt/locust/traffic-generator/locustfile.py -H https://$PETCLINIC_HOST
 ```
 
 3. Access Locus UI
