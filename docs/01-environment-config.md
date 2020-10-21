@@ -29,8 +29,8 @@ commonSecrets:
   harborDomain: harbor.stormsend.tkg-vsphere-lab.winterfell.live
   harborUser: REDACTED 
   harborPassword: REDACTED
-  kubeconfigBuildServer: REDACTED # This should be minified json version of your kubeconfig with context set to the cluster where you Tanzu Build Server is deployed.  That should be the shared services cluster.
-  kubeconfigAppServer: REDACTED # This should be minified json version of your kubeconfig with context set to the cluster where you Pet Clinic is deployed.  That should be the workload cluster.
+  kubeconfigBuildServer: 'REDACTED' # This should be minified json version of your kubeconfig with context set to the cluster where you Tanzu Build Server is deployed.  That should be the shared services cluster.
+  kubeconfigAppServer: 'REDACTED' # This should be minified json version of your kubeconfig with context set to the cluster where you Pet Clinic is deployed.  That should be the workload cluster.
   concourseHelperImage: harbor.stormsend.tkg-vsphere-lab.winterfell.live/concourse/concourse-helper # Your concourse helper image, explained in 08-petclinic-peipline.md
   concourseAlias: stormsend # Your concourse alias
   concourseUri: https://concourse.stormsend.tkg-vsphere-lab.winterfell.live # Your concourse URI
