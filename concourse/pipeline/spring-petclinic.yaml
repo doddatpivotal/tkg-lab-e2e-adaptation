@@ -70,7 +70,7 @@ jobs:
           args:
             - -c
             - |
-              docker login ((common-secrets.harborDomain)) -u ((common-secrets.harborUser)) -p ((common-secrets.harborPassword))
+              docker login ((common-secrets.harborDomain)) -u '((common-secrets.harborUser))' -p '((common-secrets.harborPassword))'
               echo $KUBECONFIG_JSON>kubeconfig.json
               export KUBECONFIG=kubeconfig.json
               set +e

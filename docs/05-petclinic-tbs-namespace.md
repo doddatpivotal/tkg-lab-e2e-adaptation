@@ -6,7 +6,9 @@ In order manage Spring Pet Clinic images, we have to do some setup.  In the past
 
 2. Configure the Harbor project to scan images immediately on push.
 
-3. Set environment variables for use in the following sections
+3. Create a robot account for build service to use when pushing images to harbor.  Store these as the credentials in your `params.yaml` file.
+
+4. Set environment variables for use in the following sections
 
 ```bash
 export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)

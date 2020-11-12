@@ -34,7 +34,7 @@ tbs:
   harborRepository: harbor.stormsend.tkg-vsphere-lab.winterfell.live/tbs/build-service  # where you want tbs images to be placed  
 commonSecrets:
   harborDomain: harbor.stormsend.tkg-vsphere-lab.winterfell.live
-  harborUser: REDACTED 
+  harborUser: REDACTED # Recommend creating a robot account in the harbor project you are pushing petclinic images too
   harborPassword: REDACTED
   kubeconfigBuildServer: 'REDACTED' # This should be minified json version of your kubeconfig with context set to the cluster where you Tanzu Build Server is deployed.  That should be the shared services cluster.
   kubeconfigAppServer: 'REDACTED' # This should be minified json version of your kubeconfig with context set to the cluster where you Pet Clinic is deployed.  That should be the workload cluster.
