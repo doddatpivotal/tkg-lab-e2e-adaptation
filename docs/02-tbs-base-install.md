@@ -12,13 +12,13 @@ export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
 
 3. Download Tanzu Build Service and Dependencies from Tanzu Network
 
->Note: The demo includes exercising a rebase, that resolves base image vulnerabilities.  In order to do this, we want to import `version 7` and `version 100.0.22` of the TBS dependencies, where we will see CVE's resolved with the run image used in the demo.
+>Note: The demo includes exercising a rebase, that resolves base image vulnerabilities.  In order to do this, we want to import `version 100.0.22` and `version 100.0.39` of the TBS dependencies, where we will see CVE's resolved with the run image used in the demo.
 
 ```bash
-# Pulled the following from pivnet info icon for tbs 1.0.2
-pivnet download-product-files --product-slug='build-service' --release-version='1.0.2' --product-file-id=773503 -d ~/Downloads
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='7' --product-file-id=765765 -d ~/Downloads
+# Pulled the following from pivnet info icon for tbs 1.0.3
+pivnet download-product-files --product-slug='build-service' --release-version='1.0.3' --product-file-id=817468 -d ~/Downloads
 pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.22' --product-file-id=801577 -d ~/Downloads
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.39' --product-file-id=822244 -d ~/Downloads
 ```
 
 4. Push the TBS images into your local Harbor registry
@@ -26,7 +26,7 @@ pivnet download-product-files --product-slug='tbs-dependencies' --release-versio
 >Note: Ensure you have logged into harbor registry with your local docker daemon.
 
 ```bash
-tar xvf ~/Downloads/build-service-1.0.2.tar -C /tmp
+tar xvf ~/Downloads/build-service-1.0.3.tar -C /tmp
 kbld relocate -f /tmp/images.lock --lock-output /tmp/images-relocated.lock --repository $TBS_REPOSITORY  
 ```
 
@@ -42,8 +42,8 @@ ytt -f /tmp/values.yaml \
     -v docker_password="$REGISTRY_PASSWORD" \
     | kbld -f /tmp/images-relocated.lock -f- \
     | kapp deploy -a tanzu-build-service -n tanzu-kapp -f- -y
-kp import -f ~/Downloads/descriptor-7.yaml
 kp import -f ~/Downloads/descriptor-100.0.22.yaml
+kp import -f ~/Downloads/descriptor-100.0.39.yaml
 ```
 
 ## Validate

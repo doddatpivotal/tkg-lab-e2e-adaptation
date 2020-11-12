@@ -2,7 +2,14 @@
 
 Setup a local params file containing all the environment specific values for the e2e demo.  This is distinct from the params file you used for the `tkg-lab`.  Below is a redacted version of the file I used and I placed it in `/local-config/values.yaml` which is referenced in the `.gitignore`.
 
->Note: For the kubeconfig reference below, I setup my context, then took the config yaml to this site to convert to JSON and minify it.  [https://www.convertjson.com/yaml-to-json.htm](https://www.convertjson.com/yaml-to-json.htm)
+>Note: for the kubeconfig references below, I used the following approach to get single line json...
+
+```bash
+# Set your context to the build server context, then...
+kubectl config view --flatten --minify | yq read - --tojson
+# Set your context to the app server context, then...
+kubectl config view --flatten --minify | yq read - --tojson
+```
 
 ```yaml
 #@data/values

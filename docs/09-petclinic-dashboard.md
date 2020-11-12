@@ -8,7 +8,7 @@
 
 4. Click "Settings" followed by "Advanced"
 
-5. Add the following events `query events(name="DEPLOY_EVENT_NAME")`
+5. Add the following events query `events(name="DEPLOY_EVENT_NAME")`
 
 >Note: The DEPLOY_EVENT_NAME value above is from `yq r $PARAMS_YAML petclinic.wavefront.deployEventName`
 
