@@ -54,4 +54,4 @@ export PARAMS_YAML=local-config/values.yaml
 
 ## Go to Next Step
 
-[Create new Shared Services Cluster](02-tbs-base-install.md)
+[Install TBS](02-tbs-base-install.md)
