@@ -18,7 +18,7 @@ export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
 # Pulled the following from pivnet info icon for tbs 1.0.3
 pivnet download-product-files --product-slug='build-service' --release-version='1.0.3' --product-file-id=817468 -d ~/Downloads
 pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.22' --product-file-id=801577 -d ~/Downloads
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.39' --product-file-id=822244 -d ~/Downloads
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.46' --product-file-id=834456 -d ~/Downloads
 ```
 
 4. Push the TBS images into your local Harbor registry
@@ -43,7 +43,7 @@ ytt -f /tmp/values.yaml \
     | kbld -f /tmp/images-relocated.lock -f- \
     | kapp deploy -a tanzu-build-service -n tanzu-kapp -f- -y
 kp import -f ~/Downloads/descriptor-100.0.22.yaml
-kp import -f ~/Downloads/descriptor-100.0.39.yaml
+kp import -f ~/Downloads/descriptor-100.0.46.yaml
 ```
 
 ## Validate
