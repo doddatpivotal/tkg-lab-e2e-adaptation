@@ -17,8 +17,8 @@ kubectl config view --flatten --minify | yq read - --tojson
 petclinic:
   host: petclinic.ironislands.tkg-vsphere-lab.winterfell.live # Ingress host for your app
   image: harbor.stormsend.tkg-vsphere-lab.winterfell.live/petclinic/spring-petclinic # image, includes your harbor domain and project
-  configRepo: https://github.com/doddatpivotal/spring-petclinic-config.git # your source code repo
-  codeRepo: https://github.com/doddatpivotal/spring-petclinic.git # your k8s config repo, you could just use mine
+  configRepo: https://github.com/doddatpivotal/spring-petclinic-config.git # your k8s config repo, you could just use mine
+  codeRepo: https://github.com/doddatpivotal/spring-petclinic.git # your source code repo
   wavefront:
     applicationName: YOUR_PREFIX-petclinic # application name, which appears in Tanzu Observability Application Status dashboard. I used dpfeffer-petclinic
     uri: https://surf.wavefront.com # Your Tanzu Observability URI
@@ -49,7 +49,7 @@ commonSecrets:
 
 ```bash
 # You can change the location to where you stored your file
-export PARAMS_YAML=local-config/values.yaml 
+export PARAMS_YAML=local-config/values.yaml
 ```
 
 ## Go to Next Step
