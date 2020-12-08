@@ -24,6 +24,7 @@ pivnet download-product-files --product-slug='tbs-dependencies' --release-versio
 4. Push the TBS images into your local Harbor registry
 
 >Note: Ensure you have logged into harbor registry with your local docker daemon.
+
 >Note: Ensure you have also logged into Tanzu Network registry (registry.pivotal.io) with your Tanzu Network credentials.
 
 ```bash
@@ -34,6 +35,7 @@ kbld relocate -f /tmp/images.lock --lock-output /tmp/images-relocated.lock --rep
 5. Deploy TBS components into your shared services cluster
 
 >Note: Ensure you have switched your local kube context to your shared services cluster
+
 >Note: If you specified a new robot account as harbor user, then make sure the account exists and is a member of the $TBS_REPOSITORY
 
 ```bash

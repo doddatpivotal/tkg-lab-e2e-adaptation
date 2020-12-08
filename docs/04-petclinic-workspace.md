@@ -14,8 +14,8 @@ export TMC_PETCLINIC_WORKSPACE=$(yq r $PARAMS_YAML petclinic.tmc.workspace)
 
 ```bash
 tmc workspace create -n $TMC_PETCLINIC_WORKSPACE -d "Workspace for Spring Pet Clinic"
-tmc cluster namespace create -c $TMC_WORKLOAD_CLUSTER -n petclinic -d "Namespace for Spring Pet Clinic" -k $TMC_PETCLINIC_WORKSPACE -m attached -p attached
-tmc cluster namespace create -c $TMC_SHARED_SERVICES_CLUSTER -n tbs-project-petclinic -d "Namespace for TBS to build Spring Pet Clinic images" -k $TMC_PETCLINIC_WORKSPACE -m attached -p attached
+tmc cluster namespace create -c $TMC_WORKLOAD_CLUSTER -n petclinic -d "Namespace for Spring Pet Clinic" -k $TMC_PETCLINIC_WORKSPACE -j attached -p attached
+tmc cluster namespace create -c $TMC_SHARED_SERVICES_CLUSTER -n tbs-project-petclinic -d "Namespace for TBS to build Spring Pet Clinic images" -k $TMC_PETCLINIC_WORKSPACE -j attached -p attached
 ```
 
 ## Go to Next Step
