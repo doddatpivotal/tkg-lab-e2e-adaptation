@@ -74,21 +74,21 @@ jobs:
               echo $KUBECONFIG_JSON>kubeconfig.json
               export KUBECONFIG=kubeconfig.json
               set +e
-              kp image list -n ((petclinic.tbsNamespace)) | grep "spring-petclinic" 
+              kp image list -n ((petclinic.tbsNamespace)) | grep "spring-petclinic"
               exists=$?
               set -e
               if [ $exists -eq 0 ]; then
                 kp image patch spring-petclinic \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
-                  --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
+                  --local-path target/spring-petclinic-2.4.0.BUILD-SNAPSHOT.jar
               else
                 kp image create spring-petclinic \
                   --tag ((petclinic.image)) \
                   --cluster-builder demo-cluster-builder \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
-                  --local-path target/spring-petclinic-2.3.0.BUILD-SNAPSHOT.jar
+                  --local-path target/spring-petclinic-2.4.0.BUILD-SNAPSHOT.jar
               fi
 
 
@@ -176,5 +176,3 @@ jobs:
               cat config-repo/k8s/values.yml
               
               ytt -f config-repo/k8s --ignore-unknown-comments | kapp deploy -n petclinic -a petclinic -y -f -
-
-
