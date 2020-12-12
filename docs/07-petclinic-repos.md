@@ -13,23 +13,45 @@ Or you could fork the Spring Project's repo [https://github.com/spring-projects/
 1. Add following to spring petclinic pom.xml
 
 ```xml
-<wavefront.version>2.0.1</wavefront.version>
-<dependencyManagement>
+  ...
+  <properties>
+    ...
+    <wavefront.version>2.1.0-SNAPSHOT</wavefront.version>
+    <spring-cloud.version>2020.0.0-M6</spring-cloud.version>
+  </properties>
+  ...
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.wavefront</groupId>
+        <artifactId>wavefront-spring-boot-bom</artifactId>
+        <version>${wavefront.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  ...
   <dependencies>
+  ...
     <dependency>
       <groupId>com.wavefront</groupId>
-      <artifactId>wavefront-spring-boot-bom</artifactId>
-      <version>${wavefront.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
+      <artifactId>wavefront-spring-boot-starter</artifactId>
     </dependency>
-  </dependencies>
-</dependencyManagement>
-...
-<dependency>
-  <groupId>com.wavefront</groupId>
-  <artifactId>wavefront-spring-boot-starter</artifactId>
-</dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+  ...
+  </depenencies>
+  ...
 ```
 
 2. Update PetclinicIntegrationTests.java
