@@ -12,13 +12,13 @@ export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
 
 3. Download Tanzu Build Service and Dependencies from Tanzu Network
 
->Note: The demo includes exercising a rebase, that resolves base image vulnerabilities.  In order to do this, we want to import `version 100.0.22` and `version 100.0.46` of the TBS dependencies, where we will see CVE's resolved with the run image used in the demo.
+>Note: The demo includes exercising a rebase, that resolves base image vulnerabilities.  In order to do this, we want to import `version 100.0.22` and `version 100.0.55` of the TBS dependencies, where we will see CVE's resolved with the run image used in the demo.
 
 ```bash
 # Pulled the following from pivnet info icon for tbs 1.0.3
 pivnet download-product-files --product-slug='build-service' --release-version='1.0.3' --product-file-id=817468 -d ~/Downloads
 pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.22' --product-file-id=801577 -d ~/Downloads
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.46' --product-file-id=834456 -d ~/Downloads
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.55' --product-file-id=853492 -d ~/Downloads
 ```
 
 4. Push the TBS images into your local Harbor registry
@@ -47,7 +47,7 @@ ytt -f /tmp/values.yaml \
     | kbld -f /tmp/images-relocated.lock -f- \
     | kapp deploy -a tanzu-build-service -n tanzu-kapp -f- -y
 kp import -f ~/Downloads/descriptor-100.0.22.yaml
-kp import -f ~/Downloads/descriptor-100.0.46.yaml
+kp import -f ~/Downloads/descriptor-100.0.55.yaml
 ```
 
 ## Validate

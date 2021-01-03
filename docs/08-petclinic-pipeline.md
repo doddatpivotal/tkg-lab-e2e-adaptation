@@ -23,7 +23,9 @@ The Spring Pet Clinic CI/CD pipeline in concourse heavily relies on environment-
 
 1. Ensure you PARAMS_YAML environment value from step 01 is set.
 
-2. Login to concourse, setup pipeline secrets, and create pipeline
+2. Ensure you have switched your local kube context to your shared services cluster
+
+3. Login to concourse, setup pipeline secrets, and create pipeline
 
 ```bash
 fly -t $(yq r $PARAMS_YAML commonSecrets.concourseAlias) login \
