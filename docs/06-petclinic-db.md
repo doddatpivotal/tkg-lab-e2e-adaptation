@@ -11,14 +11,11 @@
 Use values
 
 ```yaml
-db:
-  name: petclinic
+auth:
+  database: petclinic
   password: petclinic
-  user: petclinic
-replication:
-  enabled: false
-root:
-  password: petclinic
+  username: petclinic
+  rootPassword: petclinic
 ```
 
 5. Wait for App to be ready
