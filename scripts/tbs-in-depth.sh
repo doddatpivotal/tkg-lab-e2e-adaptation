@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# To simplify some of the commands later
-export TBS_REPOSITORY=harbor.rito.tkg-vsp-lab.hyrulelab.com/tbs/build-service
-export TBS_REGISTRY=harbor.rito.tkg-vsp-lab.hyrulelab.com
+# To simplify some of the commands later (depend on your PARAMS_YAML env var)
+export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
+export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)
 
 # Let's start by creating an image. At this point we have TBS installed and Harbor registry credentials configured
-kp image create spring-petclinic --tag harbor.rito.tkg-vsp-lab.hyrulelab.com/petclinic/spring-petclinic \
+kp image create spring-petclinic --tag $HARBOR_DOMAIN/petclinic/spring-petclinic \
  --cluster-builder demo-cluster-builder \
  --namespace tbs-project-petclinic \
  --wait  \
@@ -51,15 +51,15 @@ kp clusterstack update demo-stack \
 
 # Inspect image for metadata for traceability and auditability
 #Dockerfile image
-docker inspect $TBS_REGISTRY/concourse/concourse-helper@sha256:e89d7f3359962828ccd1857477448bb56146095215b7e91f028f11a3b5bb1e15
+docker inspect $HARBOR_DOMAIN/concourse/concourse-helper@sha256:e89d7f3359962828ccd1857477448bb56146095215b7e91f028f11a3b5bb1e15
 
-docker pull $TBS_REGISTRY/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606
+docker pull $HARBOR_DOMAIN/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606
 
-docker inspect $TBS_REGISTRY/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606
+docker inspect $HARBOR_DOMAIN/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606
 
-docker inspect $TBS_REGISTRY/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606 | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson"
+docker inspect $HARBOR_DOMAIN/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606 | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson"
 
-docker inspect $TBS_REGISTRY/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606 | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson | .buildpacks"
+docker inspect $HARBOR_DOMAIN/petclinic/spring-petclinic@sha256:87e7b83d127a8be4afed41b61b35da056b0d97ea2f22f7c424ca46c2092fd606 | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson | .buildpacks"
 
 # Update code manually
 kp image patch spring-petclinic \
