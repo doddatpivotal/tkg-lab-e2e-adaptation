@@ -1,3 +1,4 @@
 .DS_Store
 local-config/
 __pycache__
+*.secret
