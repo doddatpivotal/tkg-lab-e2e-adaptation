@@ -11,14 +11,14 @@ tkg create cluster upgrade-cluster -p dev --vsphere-controlplane-endpoint $UPGRA
 # List clusters
 tkg get clusters
 
-# TKG Versions
-tkg get kubernetesversions
-
 # create a cluster
 tkg create cluster temp-cluster -p dev --vsphere-controlplane-endpoint $TEMP_CLUSTER_IP
 
 # Scale a cluster
 tkg scale cluster scale-cluster -w 2
+
+# TKG Versions
+tkg get kubernetesversions
 
 # Upgrade a cluster
 tkg upgrade cluster upgrade-cluster --kubernetes-version v1.19.3+vmware.1
