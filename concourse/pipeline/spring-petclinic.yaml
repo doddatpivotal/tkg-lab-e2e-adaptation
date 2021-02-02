@@ -49,7 +49,7 @@ jobs:
               fi
               # Added -DskipTests and -Dcheckstyle.skip to speed up task for demo purpose
               # They should not be included in a proper test pipeline
-              ./mvnw package -DskipTests -Dcheckstyle.skip
+              ./mvnw clean package -DskipTests -Dcheckstyle.skip
               cp target/*.jar ../target
     - task: update-build-service-image
       params:
@@ -81,14 +81,14 @@ jobs:
                 kp image patch spring-petclinic \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
-                  --local-path target/spring-petclinic-2.4.0.BUILD-SNAPSHOT.jar
+                  --local-path target/*.jar
               else
                 kp image create spring-petclinic \
                   --tag ((petclinic.image)) \
                   --cluster-builder demo-cluster-builder \
                   --namespace ((petclinic.tbsNamespace)) \
                   --wait \
-                  --local-path target/spring-petclinic-2.4.0.BUILD-SNAPSHOT.jar
+                  --local-path target/*.jar
               fi
 
 
