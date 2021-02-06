@@ -1,4 +1,5 @@
 .DS_Store
-local-config/
+local-config/*
+!local-config/.gitkeep
 __pycache__
 *.secret
