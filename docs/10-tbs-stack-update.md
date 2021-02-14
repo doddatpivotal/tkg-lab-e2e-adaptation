@@ -16,16 +16,16 @@ export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
 >Note: Ensure you have switched your local kube context to your shared services cluster
 
 ```bash
-# This sets the stack to use the patched images from TBS dependencies v100.0.55.  You can check this in the descriptor-100.0.55.yaml that you downloaded in step 2.
-kp clusterstack update demo-stack \
-  --build-image $TBS_REPOSITORY/build@sha256:cf87e6b7e69c5394440c11d41c8d46eade57d13236e4fb79c80227cc15d33abf \
-  --run-image $TBS_REPOSITORY/run@sha256:52a9a0002b16042b4d34382bc244f9b6bf8fd409557fe3ca8667a5a52da44608
+# This sets the stack to use the patched images from TBS dependencies v100.0.67.  You can check by looking at full stack in the descriptor-100.0.67.yaml that you downloaded in step 2.
+kp clusterstack update demo-stack  \
+  --build-image $TBS_REPOSITORY/build@sha256:9524501920aa148bb28c38ae39a247c1d9434dda1a75a3474586410c5fccd3d6 \
+  --run-image $TBS_REPOSITORY/run@sha256:e0da03d34aaee5c60adfdd07833c926efcfb5d1b817be26ecb9c33db4c2277cf
 ```
 
 3. Validate the Harbor has been updated
 
 ```bash
-kp build list spring-petclinic
+kp build list spring-petclinic -n tbs-project-petclinic
 ```
 
 Harbor should now show a second image created with fewer CVEs.

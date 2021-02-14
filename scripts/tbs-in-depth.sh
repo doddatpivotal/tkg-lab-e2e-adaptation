@@ -40,10 +40,10 @@ kp clusterstack list
 # Explore builders
 kp clusterbuilder list
 
-# Update cluster stack to make it match with 100.0.55
-kp clusterstack update demo-stack \
- --build-image $TBS_REPOSITORY/build@sha256:cf87e6b7e69c5394440c11d41c8d46eade57d13236e4fb79c80227cc15d33abf \
- --run-image $TBS_REPOSITORY/run@sha256:52a9a0002b16042b4d34382bc244f9b6bf8fd409557fe3ca8667a5a52da44608
+# Update cluster stack to make it match with 100.0.67
+kp clusterstack update demo-stack  \
+  --build-image $TBS_REPOSITORY/build@sha256:9524501920aa148bb28c38ae39a247c1d9434dda1a75a3474586410c5fccd3d6 \
+  --run-image $TBS_REPOSITORY/run@sha256:e0da03d34aaee5c60adfdd07833c926efcfb5d1b817be26ecb9c33db4c2277cf
 # Image rebuild
 # Check Concourse to see CD triggered
 # Check Harbor again for a new image with less vulnerabilities
@@ -69,7 +69,7 @@ kp image patch spring-petclinic \
 
 # Cleanup
 
-# Update cluster stack to make it match with 100.0.22 again
+# Update cluster stack to make it match with 100.0.55 again
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:ee37e655a4f39e2e6ffa123306db0221386032d3e6e51aac809823125b0a400e \
-  --run-image $TBS_REPOSITORY/run@sha256:51cebe0dd77a1b09934c4ce407fb07e3fc6f863da99cdd227123d7bfc7411efa
+  --build-image $TBS_REPOSITORY/build@sha256:cf87e6b7e69c5394440c11d41c8d46eade57d13236e4fb79c80227cc15d33abf \
+  --run-image $TBS_REPOSITORY/run@sha256:52a9a0002b16042b4d34382bc244f9b6bf8fd409557fe3ca8667a5a52da44608
