@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # To simplify some of the commands later (depend on your PARAMS_YAML env var)
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
-export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
+export HARBOR_DOMAIN=$(yq e .commonSecrets.harborDomain $PARAMS_YAML)
 
 # Let's start by creating an image. At this point we have TBS installed and Harbor registry credentials configured
 kp image create spring-petclinic --tag $HARBOR_DOMAIN/petclinic/spring-petclinic \

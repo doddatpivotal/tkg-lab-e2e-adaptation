@@ -16,8 +16,8 @@ kp image delete spring-petclinic -n tbs-project-petclinic
 cd ~/workspace/tanzu-e2e/tkg-lab-e2e-adaptation/
 export PARAMS_YAML=local-config/values-vsphere.yaml
 
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
-export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
+export HARBOR_DOMAIN=$(yq e .commonSecrets.harborDomain $PARAMS_YAML)
 
 # Update cluster stack to make it match with 100.0.55
 kp clusterstack update demo-stack  \

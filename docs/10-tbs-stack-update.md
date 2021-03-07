@@ -8,7 +8,7 @@ Alternatively and for a more in depth set of steps to demonstrate TBS capabiliti
 1. Set environment variables for use in the following sections
 
 ```bash
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 ```
 
 2. Trigger a new build of Spring Pet Clinic by updating the Stack associated with its builder

@@ -5,9 +5,9 @@
 2. Set environment variables for use in the following sections
 
 ```bash
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
-export REGISTRY_USER=$(yq r $PARAMS_YAML commonSecrets.harborUser)
-export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
+export REGISTRY_USER=$(yq e .commonSecrets.harborUser $PARAMS_YAML)
+export REGISTRY_PASSWORD=$(yq e .commonSecrets.harborPassword $PARAMS_YAML)
 ```
 
 3. Download Tanzu Build Service and Dependencies from Tanzu Network

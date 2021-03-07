@@ -11,10 +11,10 @@ In order manage Spring Pet Clinic images, we have to do some setup.  In the past
 4. Set environment variables for use in the following sections
 
 ```bash
-export HARBOR_DOMAIN=$(yq r $PARAMS_YAML commonSecrets.harborDomain)
-export REGISTRY_USER=$(yq r $PARAMS_YAML commonSecrets.harborUser)
-export REGISTRY_PASSWORD=$(yq r $PARAMS_YAML commonSecrets.harborPassword)
-export TBS_NAMESPACE=$(yq r $PARAMS_YAML petclinic.tbs.namespace)
+export HARBOR_DOMAIN=$(yq e .commonSecrets.harborDomain $PARAMS_YAML)
+export REGISTRY_USER=$(yq e .commonSecrets.harborUser $PARAMS_YAML)
+export REGISTRY_PASSWORD=$(yq e .commonSecrets.harborPassword $PARAMS_YAML)
+export TBS_NAMESPACE=$(yq e .petclinic.tbs.namespace $PARAMS_YAML)
 ```
 
 3. Create the secret holding Harbor credentials

@@ -28,18 +28,18 @@ The Spring Pet Clinic CI/CD pipeline in concourse heavily relies on environment-
 3. Login to concourse, setup pipeline secrets, and create pipeline
 
 ```bash
-fly -t $(yq r $PARAMS_YAML commonSecrets.concourseAlias) login \
-  -c $(yq r $PARAMS_YAML commonSecrets.concourseUri) \
+fly -t $(yq e .commonSecrets.concourseAlias $PARAMS_YAML) login \
+  -c $(yq e .commonSecrets.concourseUri $PARAMS_YAML) \
   -n main \
-  -u $(yq r $PARAMS_YAML commonSecrets.concourseUser) \
-  -p $(yq r $PARAMS_YAML commonSecrets.concoursePassword)
+  -u $(yq e .commonSecrets.concourseUser $PARAMS_YAML) \
+  -p $(yq e .commonSecrets.concoursePassword $PARAMS_YAML)
 ./scripts/set-pipeline.sh
 ```
 
 3. Checkout the Pipeline
 
 ```bash
-open $(yq r $PARAMS_YAML commonSecrets.concourseUri)
+open $(yq e .commonSecrets.concourseUri $PARAMS_YAML)
 ```
 And then login
 
@@ -54,7 +54,7 @@ And then login
 8. Access the Spring Pet Clinic App and Click Around
 
 ```bash
-open https://$(yq r $PARAMS_YAML petclinic.host)
+open https://$(yq e .petclinic.host $PARAMS_YAML)
 ```
 
 ## Go to Next Step

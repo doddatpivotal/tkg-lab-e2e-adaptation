@@ -13,7 +13,7 @@ The following approach was borrowed by the TSM demo which uses [acme-fitness](ht
 1. Set environment variables for use in the following sections
 
 ```bash
-export PETCLINIC_HOST=$(yq r $PARAMS_YAML petclinic.host)
+export PETCLINIC_HOST=$(yq e .petclinic.host $PARAMS_YAML)
 ```
 
 2. Run locust via docker

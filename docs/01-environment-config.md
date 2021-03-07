@@ -6,9 +6,9 @@ Setup a local params file containing all the environment specific values for the
 
 ```bash
 # Set your context to the build server context, then...
-kubectl config view --flatten --minify | yq read - --tojson
+kubectl config view --flatten --minify | yq e - --tojson | jq -c .
 # Set your context to the app server context, then...
-kubectl config view --flatten --minify | yq read - --tojson
+kubectl config view --flatten --minify | yq e - --tojson | jq -c .
 ```
 
 ```yaml
