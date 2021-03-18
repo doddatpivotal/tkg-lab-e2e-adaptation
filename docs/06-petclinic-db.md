@@ -22,6 +22,12 @@ auth:
 
 ![Pet Clinic MySql DB](petclinic-db.png)
 
+## [Alternate Method] Install directly using helm
+
+```bash
+helm repo add tac https://charts.trials.tac.bitnami.com/demo
+helm install petclinic-db tac/mysql -n petclinic --set auth.database=petclinic,auth.password=petclinic,auth.username=petclinic,auth.rootPassword=petclinic
+```
 
 ## Go to Next Step
 
