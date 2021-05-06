@@ -19,10 +19,10 @@ export PARAMS_YAML=local-config/values-vsphere.yaml
 export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 export HARBOR_DOMAIN=$(yq e .commonSecrets.harborDomain $PARAMS_YAML)
 
-# Update cluster stack to make it match with 100.0.55
+# Update cluster stack to make it match with 100.0.81
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:cf87e6b7e69c5394440c11d41c8d46eade57d13236e4fb79c80227cc15d33abf \
-  --run-image $TBS_REPOSITORY/run@sha256:52a9a0002b16042b4d34382bc244f9b6bf8fd409557fe3ca8667a5a52da44608
+  --build-image $TBS_REPOSITORY/build@sha256:e2371eb5092beeb8eada41259e3b070ab2a0037218a28105c0fea590b3b57cb5 \
+  --run-image $TBS_REPOSITORY/run@sha256:8c61edbd83d1741b4a50478314bfcb6aea7defa65205fe56044db4ed34874155
 
 #-----------------------------------
 
@@ -89,10 +89,10 @@ open https://network.pivotal.io/products/tbs-dependencies/
 # This process can easily be automated with a CI tool like Concourse
 kp import -f ~/Downloads/descriptor-100.0.81.yaml
 
-# Update cluster stack to make it match with 100.0.81
+# Update cluster stack to make it match with 100.0.101
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:e2371eb5092beeb8eada41259e3b070ab2a0037218a28105c0fea590b3b57cb5 \
-  --run-image $TBS_REPOSITORY/run@sha256:8c61edbd83d1741b4a50478314bfcb6aea7defa65205fe56044db4ed34874155
+  --build-image $TBS_REPOSITORY/build@sha256:2cd4b7a3bdd76c839a29b0a050476ba150c2639b75ff934bb62b8430440e3ea0 \
+  --run-image $TBS_REPOSITORY/run@sha256:8e86b77ad25bde9e3f080d30789a4c8987ad81565f56eef54398bc5275070fc2
 # Image rebuild
 
 # Check logs this time

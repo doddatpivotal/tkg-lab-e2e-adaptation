@@ -13,10 +13,10 @@ In order to reliably demonstrate the TBS rebase capability that resolves CVE's i
 >Note: You can open the downloaded ~/Downloads/descriptor-55.yaml and see the image sha256 references from below.
 
 ```bash
-# make it match with 100.0.55
+# make it match with 100.0.81
 kp clusterstack create demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:cf87e6b7e69c5394440c11d41c8d46eade57d13236e4fb79c80227cc15d33abf \
-  --run-image $TBS_REPOSITORY/run@sha256:52a9a0002b16042b4d34382bc244f9b6bf8fd409557fe3ca8667a5a52da44608
+  --build-image $TBS_REPOSITORY/build@sha256:e2371eb5092beeb8eada41259e3b070ab2a0037218a28105c0fea590b3b57cb5 \
+  --run-image $TBS_REPOSITORY/run@sha256:8c61edbd83d1741b4a50478314bfcb6aea7defa65205fe56044db4ed34874155
 
 kp clusterbuilder create demo-cluster-builder \
   --tag $TBS_REPOSITORY/demo-cluster-builder \

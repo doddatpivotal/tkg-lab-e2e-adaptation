@@ -16,10 +16,10 @@ export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 >Note: Ensure you have switched your local kube context to your shared services cluster
 
 ```bash
-# This sets the stack to use the patched images from TBS dependencies v100.0.81.  You can check by looking at full stack in the descriptor-100.0.81.yaml that you downloaded in step 2.
+# This sets the stack to use the patched images from TBS dependencies v100.0.101.  You can check by looking at full stack in the descriptor-100.0.100.yaml that you downloaded in step 2.
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:e2371eb5092beeb8eada41259e3b070ab2a0037218a28105c0fea590b3b57cb5 \
-  --run-image $TBS_REPOSITORY/run@sha256:8c61edbd83d1741b4a50478314bfcb6aea7defa65205fe56044db4ed34874155
+  --build-image $TBS_REPOSITORY/build@sha256:2cd4b7a3bdd76c839a29b0a050476ba150c2639b75ff934bb62b8430440e3ea0 \
+  --run-image $TBS_REPOSITORY/run@sha256:8e86b77ad25bde9e3f080d30789a4c8987ad81565f56eef54398bc5275070fc2
 ```
 
 3. Validate the Harbor has been updated
