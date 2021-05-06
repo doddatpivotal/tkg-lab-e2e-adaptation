@@ -6,9 +6,9 @@ Setup a local params file containing all the environment specific values for the
 
 ```bash
 # Set your context to the build server context, then...
-kubectl config view --flatten --minify | yq read - --tojson
+kubectl config view --flatten --minify | yq e - --tojson | jq -c .
 # Set your context to the app server context, then...
-kubectl config view --flatten --minify | yq read - --tojson
+kubectl config view --flatten --minify | yq e - --tojson | jq -c .
 ```
 
 ```yaml
@@ -50,6 +50,27 @@ commonSecrets:
 ```bash
 # You can change the location to where you stored your file
 export PARAMS_YAML=local-config/values.yaml
+```
+
+## [Optional] Automate population of the kubeconfig in your params.yaml
+
+```bash
+# Set your context to the build server context, then...
+export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
+yq e -i '.commonSecrets.kubeconfigBuildServer = strenv(CONFIG)' $PARAMS_YAML
+
+# Change your context to the app server and repeat
+export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
+yq e -i '.commonSecrets.kubeconfigAppServer = strenv(CONFIG)' $PARAMS_YAML
+
+# Add back the document seperator that yq removes
+sed -i -e '2i\
+---
+' "$PARAMS_YAML"
+rm -f "$PARAMS_YAML-e"
+
+# Clear out the neviornment variable
+unset CONFIG
 ```
 
 ## Go to Next Step

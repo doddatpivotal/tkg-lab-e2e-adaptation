@@ -8,7 +8,7 @@ Alternatively and for a more in depth set of steps to demonstrate TBS capabiliti
 1. Set environment variables for use in the following sections
 
 ```bash
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 ```
 
 2. Trigger a new build of Spring Pet Clinic by updating the Stack associated with its builder
@@ -16,10 +16,10 @@ export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
 >Note: Ensure you have switched your local kube context to your shared services cluster
 
 ```bash
-# This sets the stack to use the patched images from TBS dependencies v100.0.67.  You can check by looking at full stack in the descriptor-100.0.67.yaml that you downloaded in step 2.
+# This sets the stack to use the patched images from TBS dependencies v100.0.101.  You can check by looking at full stack in the descriptor-100.0.100.yaml that you downloaded in step 2.
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:9524501920aa148bb28c38ae39a247c1d9434dda1a75a3474586410c5fccd3d6 \
-  --run-image $TBS_REPOSITORY/run@sha256:e0da03d34aaee5c60adfdd07833c926efcfb5d1b817be26ecb9c33db4c2277cf
+  --build-image $TBS_REPOSITORY/build@sha256:2cd4b7a3bdd76c839a29b0a050476ba150c2639b75ff934bb62b8430440e3ea0 \
+  --run-image $TBS_REPOSITORY/run@sha256:8e86b77ad25bde9e3f080d30789a4c8987ad81565f56eef54398bc5275070fc2
 ```
 
 3. Validate the Harbor has been updated

@@ -3,11 +3,12 @@
 ## Reset Demo Stack For use Later in a demo
 
 ```bash
-export TBS_REPOSITORY=$(yq r $PARAMS_YAML tbs.harborRepository)
+export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 
+# make it match with 100.0.81
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:97ea650641effa523611d715fa16549968252ba803f19b13b4e9d5821708aea6 \
-  --run-image $TBS_REPOSITORY/run@sha256:4084f6704cc27a7d93ebb050f5712c869072530576c473440e43c311c0c802f7
+  --build-image $TBS_REPOSITORY/build@sha256:e2371eb5092beeb8eada41259e3b070ab2a0037218a28105c0fea590b3b57cb5 \
+  --run-image $TBS_REPOSITORY/run@sha256:8c61edbd83d1741b4a50478314bfcb6aea7defa65205fe56044db4ed34874155
 ```
 
 ## Teardown Pet Clinic

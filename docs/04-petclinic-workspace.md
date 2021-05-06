@@ -5,9 +5,9 @@ We want to deploy Spring Pet Clinic to your tkg-lab workload cluster.  Let's cre
 1. Set environment variables for use in the following sections
 
 ```bash
-export TMC_WORKLOAD_CLUSTER=$(yq r $PARAMS_YAML petclinic.tmc.workload-cluster)
-export TMC_SHARED_SERVICES_CLUSTER=$(yq r $PARAMS_YAML petclinic.tmc.shared-services-cluster)
-export TMC_PETCLINIC_WORKSPACE=$(yq r $PARAMS_YAML petclinic.tmc.workspace)
+export TMC_WORKLOAD_CLUSTER=$(yq e .petclinic.tmc.workload-cluster $PARAMS_YAML)
+export TMC_SHARED_SERVICES_CLUSTER=$(yq e .petclinic.tmc.shared-services-cluster $PARAMS_YAML)
+export TMC_PETCLINIC_WORKSPACE=$(yq e .petclinic.tmc.workspace $PARAMS_YAML)
 ```
 
 2. Use the Tanzu Mission Control cli, `tmc`, to create a workspace and namespace for the Spring Pet Clinic app.
