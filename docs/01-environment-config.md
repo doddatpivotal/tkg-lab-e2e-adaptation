@@ -19,6 +19,10 @@ petclinic:
   image: harbor.stormsend.tkg-vsphere-lab.winterfell.live/petclinic/spring-petclinic # image, includes your harbor domain and project
   configRepo: https://github.com/doddatpivotal/spring-petclinic-config.git # your k8s config repo, you could just use mine
   codeRepo: https://github.com/doddatpivotal/spring-petclinic.git # your source code repo
+  # Uncomment the following lines if you have a private repos with http access.  Assumes same un/pw. This
+  # will configure concourse resource appropriately
+  # gitUsername: REDACTED
+  # gitPassword: REDACTED
   wavefront:
     applicationName: YOUR_PREFIX-petclinic # application name, which appears in Tanzu Observability Application Status dashboard. I used dpfeffer-petclinic
     uri: https://surf.wavefront.com # Your Tanzu Observability URI
