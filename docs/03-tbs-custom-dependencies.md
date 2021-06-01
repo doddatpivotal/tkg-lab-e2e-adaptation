@@ -8,9 +8,9 @@ export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 
 2. Setup custom demo stack and cluster builder
 
-In order to reliably demonstrate the TBS rebase capability that resolves CVE's identified by Harbor, we create a custom ClusterStack within TBS with a TBS dependency version that has known high vulnerabilities, `version 100.0.55`.  We downloaded and imported that version earlier, now we will create the ClusterStack `demo-stack` and ClusterBuilder `demo-cluster-builder` using those vulnerabilities from the `full` ClusterStack.
+In order to reliably demonstrate the TBS rebase capability that resolves CVE's identified by Harbor, we create a custom ClusterStack within TBS with a TBS dependency version that has known high vulnerabilities, `version 100.0.81`.  We downloaded and imported that version earlier, now we will create the ClusterStack `demo-stack` and ClusterBuilder `demo-cluster-builder` using those vulnerabilities from the `full` ClusterStack.
 
->Note: You can open the downloaded ~/Downloads/descriptor-55.yaml and see the image sha256 references from below.
+>Note: You can open the downloaded ~/Downloads/descriptor-100.0.81.yaml and see the image sha256 references from below.
 
 ```bash
 # make it match with 100.0.81
