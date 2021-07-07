@@ -63,7 +63,7 @@ export PARAMS_YAML=local-config/values.yaml
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigBuildServer = strenv(CONFIG)' $PARAMS_YAML
 
-# Change your context to the app server (Worload Cluster), then...
+# Change your context to the app server (Workload Cluster), then...
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigAppServer = strenv(CONFIG)' $PARAMS_YAML
 
