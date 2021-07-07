@@ -59,11 +59,11 @@ export PARAMS_YAML=local-config/values.yaml
 ## [Optional] Automate population of the kubeconfig in your params.yaml
 
 ```bash
-# Set your context to the build server context, then...
+# Set your context to the build server (Shared Services Cluster), then...
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigBuildServer = strenv(CONFIG)' $PARAMS_YAML
 
-# Change your context to the app server and repeat
+# Change your context to the app server (Worload Cluster), then...
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigAppServer = strenv(CONFIG)' $PARAMS_YAML
 
