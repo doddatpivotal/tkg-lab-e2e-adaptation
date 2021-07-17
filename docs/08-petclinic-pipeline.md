@@ -45,9 +45,9 @@ And then login
 
 4. Unpause the pipeline
 
-5. Notice the `continuous-integration` job is automatically triggered
+5. Notice the `continuous-integration` job is automatically triggered.  It may take a minute or two.
 
-6. Validate that the image was created in Harbor
+6. Validate that the image was created in Harbor.  This will happen when the continuous-integration job is complete.  This may take 8 minutes or so.
 
 7. Validate that the CD Pipeline was triggered and runs successfully
 

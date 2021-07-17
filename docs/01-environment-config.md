@@ -36,6 +36,8 @@ petclinic:
     namespace: tbs-project-petclinic
 tbs:
   harborRepository: harbor.stormsend.tkg-vsphere-lab.winterfell.live/tbs/build-service  # where you want tbs images to be placed  
+  harborUser: robot$tbs # set this to the harbor user account you want tbs to use to update build service images.  Recommend creating a robot account, but could be admin account
+  harborPassword: REDACTED # User account associated to the above account
 commonSecrets:
   harborDomain: harbor.stormsend.tkg-vsphere-lab.winterfell.live
   harborUser: REDACTED # Recommend creating a robot account in the harbor project you are pushing petclinic images too
