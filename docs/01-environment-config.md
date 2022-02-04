@@ -26,7 +26,7 @@ petclinic:
   wavefront:
     applicationName: YOUR_PREFIX-petclinic # application name, which appears in Tanzu Observability Application Status dashboard. I used dpfeffer-petclinic
     uri: https://surf.wavefront.com # Your Tanzu Observability URI
-    apiToken: REDACTED # Your Tanzu Obsevability Api Token
+    apiToken: REDACTED # Your Tanzu Observability Api Token
     deployEventName: YOUR_EVENT_NAME # Mine is dpfeffer-spring-petclinic-deploy, we don't want to conflict here
   tmc:
     workload-cluster: YOUR_WORKLOAD_CLUSTER_NAME_IN_TMC # Mine is dpfeffer-ironislands-vsphere

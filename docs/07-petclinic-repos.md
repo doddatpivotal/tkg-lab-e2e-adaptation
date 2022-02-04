@@ -72,6 +72,10 @@ management.metrics.export.wavefront.apiToken=foo
 
 - Config Repo: Fork [https://github.com/doddatpivotal/spring-petclinic-config](https://github.com/doddatpivotal/spring-petclinic-config)
 
+- If using the GitOps (ArgoCD) based approach make sure your config repo has the `/argocd` folder. Example in [https://github.com/jaimegag/spring-petclinic-config](https://github.com/jaimegag/spring-petclinic-config)
+
 ## Go to Next Step
 
 [Create Concourse Pipeline for Spring Pet Clinic](08-petclinic-pipeline.md)
+
+If using the GitOps (ArgoCD) go to [Create ArgoCD Pipeline for Spring Pet Clinic](08-petclinic-pipeline-gitops.md)

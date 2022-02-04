@@ -1,5 +1,7 @@
 # TKG Lab Foundation
 
+If using the GitOps (ArgoCD) go to [TKG Lab Foundation for GitOps](00-tkg-lab-foundation-gitops.md) instead.
+
 Execute the `Foudational Lab Setup` from [tkg-lab](https://github.com/Pivotal-Field-Engineering/tkg-lab).
 
 >Note: I tested this with 6 worker nodes in the Shared Services cluster and 4 worker nodes in the Workload cluster.  Worker nodes were 2 core, 8 GB.
