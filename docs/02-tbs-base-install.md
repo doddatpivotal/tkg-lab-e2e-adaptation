@@ -8,28 +8,27 @@
 export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 export REGISTRY_USER=$(yq e .commonSecrets.harborUser $PARAMS_YAML)
 export REGISTRY_PASSWORD=$(yq e .commonSecrets.harborPassword $PARAMS_YAML)
+export TANZUNET_USERNAME=$(yq e .commonSecrets.tanzunet_username $PARAMS_YAML)
+export TANZUNET_PASSWORD=$(yq e .commonSecrets.tanzunet_password $PARAMS_YAML)
 ```
 
-3. Download Tanzu Build Service and Dependencies from Tanzu Network
-
->Note: The demo includes exercising a rebase, that resolves base image vulnerabilities.  In order to do this, we want to import `version 100.0.55` and `version 100.0.81` of the TBS dependencies, where we will see CVE's resolved with the run image used in the demo.
-
-```bash
-# Pulled the following from pivnet info icon for tbs 1.1.4
-pivnet download-product-files --product-slug='build-service' --release-version='1.1.4' --product-file-id=904252 -d ~/Downloads
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.81' --product-file-id=909780 -d ~/Downloads
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.101' --product-file-id=940722 -d ~/Downloads
-```
-
-4. Push the TBS images into your local Harbor registry
+3. Relocate the TBS images into your local Harbor registry
 
 >Note: Ensure you have logged into harbor registry with your local docker daemon.
 
->Note: Ensure you have also logged into Tanzu Network registry (registry.pivotal.io) with your Tanzu Network credentials.
+>Note: Ensure you have also logged into Tanzu Registry (docker login registry.tanzu.vmware.com) with your Tanzu Network credentials.
+
+>Note: Make sure you have the right Carvel tools versions. This combination worked for me: imgpkg v0.17.0 (0.18.0 fails!), kbld v0.31.0, ytt 0.35.1
 
 ```bash
-tar xvf ~/Downloads/build-service-1.1.4.tar -C /tmp
-kbld relocate -f /tmp/images.lock --lock-output /tmp/images-relocated.lock --repository $TBS_REPOSITORY
+imgpkg copy -b "registry.tanzu.vmware.com/build-service/bundle:1.4.2" --to-repo $TBS_REPOSITORY
+```
+
+4. Pull the Tanzu Build Service bundle locally:
+
+```bash
+rm -rf /tmp/bundle
+imgpkg pull -b $TBS_REPOSITORY":1.4.2" -o /tmp/bundle
 ```
 
 5. Deploy TBS components into your shared services cluster
@@ -39,15 +38,22 @@ kbld relocate -f /tmp/images.lock --lock-output /tmp/images-relocated.lock --rep
 >Note: If you specified a new robot account as harbor user, then make sure the account exists and is a member of the $TBS_REPOSITORY
 
 ```bash
-ytt -f /tmp/values.yaml \
-    -f /tmp/manifests/ \
-    -v docker_repository="$TBS_REPOSITORY" \
-    -v docker_username="$REGISTRY_USER" \
-    -v docker_password="$REGISTRY_PASSWORD" \
-    | kbld -f /tmp/images-relocated.lock -f- \
-    | kapp deploy -a tanzu-build-service -n tanzu-kapp -f- -y
-kp import -f ~/Downloads/descriptor-100.0.81.yaml
-kp import -f ~/Downloads/descriptor-100.0.101.yaml
+ytt -f /tmp/bundle/config/ \
+	-v kp_default_repository="$TBS_REPOSITORY" \
+	-v kp_default_repository_username="$REGISTRY_USER" \
+	-v kp_default_repository_password="$REGISTRY_PASSWORD" \
+	--data-value-yaml pull_from_kp_default_repo=true \
+	| kbld -f /tmp/bundle/.imgpkg/images.yml -f- \
+	| kapp deploy -a tanzu-build-service -f- -y
+```
+
+6. Install newest descriptor
+
+```bash
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.230' --product-file-id=1106335 -d ~/Downloads
+kp import -f ~/Downloads/descriptor-100.0.230.yaml
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.255' --product-file-id=1142220 -d ~/Downloads
+kp import -f ~/Downloads/tap-1.0.0-descriptor-100.0.255.yaml
 ```
 
 ## Validate
