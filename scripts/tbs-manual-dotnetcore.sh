@@ -54,25 +54,24 @@ kp clusterstack update demo-stack  \
   --build-image $TBS_REPOSITORY@sha256:ae63b7c588f3dd728d2d423dd26790af784decc3d3947eaff2696b8fd30bcfb0 \
   --run-image $TBS_REPOSITORY@sha256:ec48e083ab3d47df591de02423440c5de7f8af2e4ec6b4263af476812c4e3f85
 # Image(s) rebuild
-kp build list todos -n $TBS_TODOS_NAMESPACE
+watch kp build list todos -n $TBS_TODOS_NAMESPACE
 # Check logs
 kp build logs todos -n $TBS_TODOS_NAMESPACE
 
 # ---------------------------
-#   More TBS
+#   Iterate on Source Code
 # ---------------------------
 
-# Let's make a quick code change and push it (within the spring-petclinic repo folder)
-# Go to your petclinic app local code repo
-cd ~/Code/dotnet-core-sql-k8s-demo src/main/resources/templates/welcome.html
+# Let's make a quick code change and push it (within the dotnet-core-sql-k8s-demo repo folder)
+# Change some literal string in
+vi ~/Code/dotnet-core-sql-k8s-demo/employee-todo-list-api/Controllers/EmployeesController.cs
 git add . && git commit -m "code change" && git push origin main
 
 # Check new build kicks in
-watch kp build list spring-petclinic -n tbs-project-petclinic
+watch kp build list todos -n $TBS_TODOS_NAMESPACE
 
 # Check Harbor again for a new image
 
-# TODO: Sync changes on ArgoCD or make changes on k8s config objects instead (ConfigMap) that causee app UI to react.
 
 # Explore the build service central configuration
 # Explore stores
@@ -95,15 +94,12 @@ docker pull jaimegag/cassandra-demo
 docker inspect jaimegag/cassandra-demo
 
 # Now show a TBS built image
-
-export MOST_RECENT_SUCCESS_IMAGE=$(kp build list spring-petclinic -n tbs-project-petclinic | grep SUCCESS | tail -1 | awk '{print $(3)}')
-docker pull $MOST_RECENT_SUCCESS_IMAGE
-
-docker inspect $MOST_RECENT_SUCCESS_IMAGE
+docker pull $TODOS_IMAGE
+docker inspect $TODOS_IMAGE
 # Discuss the sheer amount of metadata, baked right into the image itself
 
-docker inspect $MOST_RECENT_SUCCESS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson"
+docker inspect $TODOS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson"
 # Can be parsed
 
-docker inspect $MOST_RECENT_SUCCESS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson | .buildpacks"
+docker inspect $TODOS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson | .buildpacks"
 # And even more specific example, which buildpacks
