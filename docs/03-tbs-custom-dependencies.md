@@ -13,7 +13,7 @@ In order to reliably demonstrate the TBS rebase capability that resolves CVE's i
 >Note: You can open the downloaded ~/Downloads/descriptor-100.0.81.yaml and see the image sha256 references from below.
 
 ```bash
-# make it match with 100.0.81
+# make it match with 100.0.230
 kp clusterstack create demo-stack  \
   --build-image $TBS_REPOSITORY@sha256:999eab7567ec796f4284b5b998b24952a2c977506c88f69dcf9b11299164d3a7 \
   --run-image $TBS_REPOSITORY@sha256:c7add890cc6d88fa12d2f1cd9864239aaac2f95c80a5a82c6d811c2ca0bee93d
