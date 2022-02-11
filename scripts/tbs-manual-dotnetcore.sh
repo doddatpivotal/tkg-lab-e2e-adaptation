@@ -7,6 +7,8 @@
 # To simplify some of the commands later (depend on your PARAMS_YAML env var)
 cd ~/Code/tkg-lab-e2e-adaptation
 export PARAMS_YAML=local-config/values.yaml
+export HARBOR_DOMAIN=$(yq e .commonSecrets.harborDomain $PARAMS_YAML)
+export HARBOR_USER=$(yq e .commonSecrets.harborUser $PARAMS_YAML)
 export TBS_REPOSITORY=$(yq e .tbs.harborRepository $PARAMS_YAML)
 export TODOS_IMAGE=$(yq e .todos.image $PARAMS_YAML)
 export TBS_TODOS_NAMESPACE=$(yq e .todos.tbs.namespace $PARAMS_YAML)
@@ -14,6 +16,14 @@ export TODOS_REPO=$(yq e .todos.codeRepo $PARAMS_YAML)
 export TODOS_REPO_PATH=$(yq e .todos.codeRepoPath $PARAMS_YAML)
 
 # We assume TBS_TODOS_NAMESPACE exists and the Harbor credentials are created via "kp" in it
+# Create namespace if it doesn't exist
+kubectl create namespace $TBS_TODOS_NAMESPACE --dry-run=client --output yaml | kubectl apply -f -
+
+# Create secret for tbs/kpack to be able to push new OCI images to our registry
+kp secret create harbor-creds \
+  --registry $HARBOR_DOMAIN \
+  --registry-user $HARBOR_USER \
+  --namespace $TBS_TODOS_NAMESPACE
 
 # Delete current images
 kp image delete todos -n $TBS_TODOS_NAMESPACE
