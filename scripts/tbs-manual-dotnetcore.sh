@@ -14,6 +14,7 @@ export TODOS_IMAGE=$(yq e .todos.image $PARAMS_YAML)
 export TBS_TODOS_NAMESPACE=$(yq e .todos.tbs.namespace $PARAMS_YAML)
 export TODOS_REPO=$(yq e .todos.codeRepo $PARAMS_YAML)
 export TODOS_REPO_PATH=$(yq e .todos.codeRepoPath $PARAMS_YAML)
+export TODOS_LOCAL_PATH=$(yq e .todos.codeLocalPath $PARAMS_YAML)
 
 # We assume TBS_TODOS_NAMESPACE exists and the Harbor credentials are created via "kp" in it
 # Create namespace if it doesn't exist
@@ -42,9 +43,7 @@ kp image create todos --tag $TODOS_IMAGE \
  --cluster-builder demo-cluster-builder \
  --namespace $TBS_TODOS_NAMESPACE \
  --wait  \
- --git $TODOS_REPO \
- --git-revision main \
- --sub-path $TODOS_REPO_PATH
+ --local-path $TODOS_LOCAL_PATH
 
 # Let's observe the stages of the build
 # ...
@@ -72,13 +71,20 @@ kp build logs todos -n $TBS_TODOS_NAMESPACE
 #   Iterate on Source Code
 # ---------------------------
 
-# Let's make a quick code change and push it (within the dotnet-core-sql-k8s-demo repo folder)
+# Let's make a quick code change 
 # Change some literal string in
-vi ~/Code/dotnet-core-sql-k8s-demo/employee-todo-list-api/Controllers/EmployeesController.cs
+vi $TODOS_LOCAL_PATH/Controllers/EmployeesController.cs
 git add . && git commit -m "code change" && git push origin main
 
-# Check new build kicks in
-watch kp build list todos -n $TBS_TODOS_NAMESPACE
+# Patch existing image (this would normally be triggered by the CI pipeline when suitable)
+kp image patch todos \
+ --cluster-builder demo-cluster-builder \
+ --namespace $TBS_TODOS_NAMESPACE \
+ --wait  \
+ --local-path $TODOS_LOCAL_PATH
+
+# Check new build
+kp build list todos -n $TBS_TODOS_NAMESPACE
 
 # Check Harbor again for a new image
 
@@ -113,3 +119,30 @@ docker inspect $TODOS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metada
 
 docker inspect $TODOS_IMAGE | jq ".[].Config.Labels.\"io.buildpacks.build.metadata\" | fromjson | .buildpacks"
 # And even more specific example, which buildpacks
+
+
+# -------------------------------
+#   Create image from source code from GitHub
+# -------------------------------
+
+# Let's also see how can we create an image from a source code repo (github)
+kp image create todos2 --tag $TODOS_IMAGE \
+ --cluster-builder demo-cluster-builder \
+ --namespace $TBS_TODOS_NAMESPACE \
+ --wait  \
+ --git $TODOS_REPO \
+ --git-revision main \
+ --sub-path $TODOS_REPO_PATH
+
+
+# ---------------------------
+#   Iterate on Source Code into GitHub
+# ---------------------------
+
+# Let's make a quick code change and push it (within the dotnet-core-sql-k8s-demo repo folder)
+# Change some literal string in
+vi $TODOS_LOCAL_PATH/Controllers/EmployeesController.cs
+git add . && git commit -m "code change" && git push origin main
+
+# Check new build kicks in
+watch kp build list todos2 -n $TBS_TODOS_NAMESPACE
