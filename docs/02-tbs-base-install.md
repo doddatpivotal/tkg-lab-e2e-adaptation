@@ -21,14 +21,14 @@ export TANZUNET_PASSWORD=$(yq e .commonSecrets.tanzunet_password $PARAMS_YAML)
 >Note: Make sure you have the right Carvel tools versions. This combination worked for me: imgpkg v0.17.0 (0.18.0 fails!), kbld v0.31.0, ytt 0.35.1
 
 ```bash
-imgpkg copy -b "registry.tanzu.vmware.com/build-service/bundle:1.4.2" --to-repo $TBS_REPOSITORY
+imgpkg copy -b "registry.tanzu.vmware.com/build-service/bundle:1.4.3" --to-repo $TBS_REPOSITORY
 ```
 
 4. Pull the Tanzu Build Service bundle locally:
 
 ```bash
 rm -rf /tmp/bundle
-imgpkg pull -b $TBS_REPOSITORY":1.4.2" -o /tmp/bundle
+imgpkg pull -b $TBS_REPOSITORY":1.4.3" -o /tmp/bundle
 ```
 
 5. Deploy TBS components into your shared services cluster
@@ -50,10 +50,10 @@ ytt -f /tmp/bundle/config/ \
 6. Install newest descriptor
 
 ```bash
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.230' --product-file-id=1106335 -d ~/Downloads
-kp import -f ~/Downloads/descriptor-100.0.230.yaml
-pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.255' --product-file-id=1142220 -d ~/Downloads
-kp import -f ~/Downloads/tap-1.0.0-descriptor-100.0.255.yaml
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.286' --product-file-id=1188028 -d ~/Downloads
+kp import -f ~/Downloads/descriptor-100.0.286.yaml
+pivnet download-product-files --product-slug='tbs-dependencies' --release-version='100.0.255' --product-file-id=1142215 -d ~/Downloads
+kp import -f ~/Downloads/descriptor-100.0.255.yaml
 ```
 
 ## Validate

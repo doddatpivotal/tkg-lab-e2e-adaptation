@@ -29,10 +29,10 @@ kp secret create harbor-creds \
 # Delete current images
 kp image delete todos -n $TBS_TODOS_NAMESPACE
 
-# Update cluster stack to make it match with 100.0.230
+# Update cluster stack to make it match with 100.0.255
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY@sha256:999eab7567ec796f4284b5b998b24952a2c977506c88f69dcf9b11299164d3a7 \
-  --run-image $TBS_REPOSITORY@sha256:c7add890cc6d88fa12d2f1cd9864239aaac2f95c80a5a82c6d811c2ca0bee93d
+  --build-image $TBS_REPOSITORY@sha256:ae63b7c588f3dd728d2d423dd26790af784decc3d3947eaff2696b8fd30bcfb0 \
+  --run-image $TBS_REPOSITORY@sha256:ec48e083ab3d47df591de02423440c5de7f8af2e4ec6b4263af476812c4e3f85
 
 # -------------------------------
 #   Create image from source code
@@ -58,10 +58,10 @@ kp build logs todos -n $TBS_TODOS_NAMESPACE
 
 # Let's go to harbor and find the images
 
-# Update cluster stack to make it match with 100.0.255
+# Update cluster stack to make it match with 100.0.286
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY@sha256:ae63b7c588f3dd728d2d423dd26790af784decc3d3947eaff2696b8fd30bcfb0 \
-  --run-image $TBS_REPOSITORY@sha256:ec48e083ab3d47df591de02423440c5de7f8af2e4ec6b4263af476812c4e3f85
+  --build-image $TBS_REPOSITORY@sha256:43c78f6bcbcfb4ddf1ec6c14effdf26414ffbb21d8773519e85c325fd1a2561f \
+  --run-image $TBS_REPOSITORY@sha256:d20231b7664446896d79d4d9178a62ce04a45d3ce02b3be54964a6c403b1ef06
 # Image(s) rebuild
 watch kp build list todos -n $TBS_TODOS_NAMESPACE
 # Check logs
@@ -74,7 +74,6 @@ kp build logs todos -n $TBS_TODOS_NAMESPACE
 # Let's make a quick code change 
 # Change some literal string in
 vi $TODOS_LOCAL_PATH/Controllers/EmployeesController.cs
-git add . && git commit -m "code change" && git push origin main
 
 # Patch existing image (this would normally be triggered by the CI pipeline when suitable)
 kp image patch todos \
@@ -86,8 +85,9 @@ kp image patch todos \
 # Check new build
 kp build list todos -n $TBS_TODOS_NAMESPACE
 
-# Check Harbor again for a new image
+# Check how only one layer is changed and the rest of the layers are reused from cache
 
+# Check Harbor again for a new image
 
 # Explore the build service central configuration
 # Explore stores
