@@ -40,10 +40,10 @@ kp clusterstack list
 # Explore builders
 kp clusterbuilder list
 
-# Update cluster stack to make it match with 100.0.101
+# Update cluster stack to make it match with 100.0.125
 kp clusterstack update demo-stack  \
-  --build-image $TBS_REPOSITORY/build@sha256:2cd4b7a3bdd76c839a29b0a050476ba150c2639b75ff934bb62b8430440e3ea0 \
-  --run-image $TBS_REPOSITORY/run@sha256:8e86b77ad25bde9e3f080d30789a4c8987ad81565f56eef54398bc5275070fc2
+  --build-image $TBS_REPOSITORY/build@sha256:8be3ca33427c19dc68d3a9a900e99f61487221894a4fde6d4819e5c3026f11a8 \
+  --run-image $TBS_REPOSITORY/run@sha256:47a7b67d28a0e137b9918fc6380860086966abbac43242057373d346da3e1c76
 # Image rebuild
 # Check Concourse to see CD triggered
 # Check Harbor again for a new image with less vulnerabilities

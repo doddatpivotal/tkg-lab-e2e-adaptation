@@ -19,6 +19,10 @@ petclinic:
   image: harbor.stormsend.tkg-vsphere-lab.winterfell.live/petclinic/spring-petclinic # image, includes your harbor domain and project
   configRepo: https://github.com/doddatpivotal/spring-petclinic-config.git # your k8s config repo, you could just use mine
   codeRepo: https://github.com/doddatpivotal/spring-petclinic.git # your source code repo
+  # Uncomment the following lines if you have a private repos with http access.  Assumes same un/pw. This
+  # will configure concourse resource appropriately
+  # gitUsername: REDACTED
+  # gitPassword: REDACTED
   wavefront:
     applicationName: YOUR_PREFIX-petclinic # application name, which appears in Tanzu Observability Application Status dashboard. I used dpfeffer-petclinic
     uri: https://surf.wavefront.com # Your Tanzu Observability URI
@@ -32,6 +36,8 @@ petclinic:
     namespace: tbs-project-petclinic
 tbs:
   harborRepository: harbor.stormsend.tkg-vsphere-lab.winterfell.live/tbs/build-service  # where you want tbs images to be placed  
+  harborUser: robot$tbs # set this to the harbor user account you want tbs to use to update build service images.  Recommend creating a robot account, but could be admin account
+  harborPassword: REDACTED # User account associated to the above account
 commonSecrets:
   harborDomain: harbor.stormsend.tkg-vsphere-lab.winterfell.live
   harborUser: REDACTED # Recommend creating a robot account in the harbor project you are pushing petclinic images too
@@ -55,11 +61,11 @@ export PARAMS_YAML=local-config/values.yaml
 ## [Optional] Automate population of the kubeconfig in your params.yaml
 
 ```bash
-# Set your context to the build server context, then...
+# Set your context to the build server (Shared Services Cluster), then...
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigBuildServer = strenv(CONFIG)' $PARAMS_YAML
 
-# Change your context to the app server and repeat
+# Change your context to the app server (Workload Cluster), then...
 export CONFIG=$(kubectl config view --flatten --minify | yq e - --tojson | jq -c .)
 yq e -i '.commonSecrets.kubeconfigAppServer = strenv(CONFIG)' $PARAMS_YAML
 

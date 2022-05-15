@@ -4,9 +4,9 @@ In order manage Spring Pet Clinic images, we have to do some setup.  In the past
 
 1. Create a project in Harbor for Spring Pet Clinic images.  I created it as `petclinic` and set it as public.
 
-2. Configure the Harbor project to scan images immediately on push.
+2. Configure the Harbor project to scan images immediately on push.  Access project, and choose `Configuration` tab. Check `Automatically scan images on push`
 
-3. Create a robot account for build service to use when pushing images to harbor.  Store these as the credentials in your `params.yaml` file.
+3. Create a robot account for build service to use when pushing images to harbor.  This can be done in the UI by accessing the project and then selecting the `Robot Accounts` tab.  Store these as the credentials in your `params.yaml` file as `.commonSecrets.harborUser` and `.commonSecrets.harborPassword`.
 
 4. Set environment variables for use in the following sections
 
